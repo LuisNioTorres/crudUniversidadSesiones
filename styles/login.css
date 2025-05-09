@@ -1,0 +1,103 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+a{
+    color: blue;
+}
+
+label{
+    font-size: 16px;
+}
+
+body{
+    background-image: url("../imagenes/body.png");
+    background-repeat: no-repeat;
+    background-size:100%;
+}
+
+.container{
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+}
+
+#left-container{
+    background-color: white;
+    width: 50%;
+    height: 100%;
+}
+
+form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formulario__grupo{
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario__options{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.formulario__grupo > input {
+    width: 80%;
+    padding: 5px;
+}
+
+.formulario__grupo > .grupo__contraseña.active{
+    border: solid 2px rgb(240, 94, 94);
+}
+
+
+
+input:focus{
+    outline: none;
+    border: solid 2px rgb(94, 169, 240);
+}
+
+.formulario__boton-enviar{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+}
+
+.formulario__boton-enviar > button{
+    background-color: rgb(128, 235, 163);
+    width: 100%;
+    height: 45px;
+    border: solid 1px black
+}
+
+.formulario__mensaje_error{
+    color: rgb(236, 65, 65);
+    font-size: 18px;
+}
+#right-container{
+    width: 50%;
+    background-image: url("../imagenes/logo.png");
+    background-repeat: no-repeat;
+    background-size: 160%;
+    background-position: center;
+}

@@ -1,0 +1,23 @@
+.screen__facultad{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    color: rgb(49, 49, 49);
+}
+
+.carreras{
+    display: flex;
+    gap: 15px;
+}
+
+.carrera{
+    font-size: 15px;
+    background-color: rgb(235, 141, 141);
+    width: 200px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 15px;
+}
