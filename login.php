@@ -1,3 +1,25 @@
+<?php
+include('./funciones.php');
+
+$usuario = isset($_POST['usuario']) ? $_POST['usuario'] : "";
+$contraseña = isset($_POST['contraseña']) ? $_POST['contraseña'] : "";
+$errores = [];
+
+if(isset($_POST['iniciar_sesion'])){
+    validarUsuario($errores,$usuario);
+    validarContraseña($errores,$contraseña);
+    if(empty($errores)){
+    $login = loguearUsuario($usuario,$contraseña);
+        if(!$login){
+            $errores['login'] = 'El usuario o la contraseña son incorrectos';
+        }
+    }
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,17 +31,31 @@
 <body>
     <div class="container">
         <div class="" id="left-container">
-            <form action="/" class="formulario">
+            <form class="formulario" method="post">
             <h2 class="titulo">Bienvenidos</h2>
 
             <div class="formulario">
                 <div class="formulario__grupo">
                     <label for="usuario">Usuario:</label>
-                    <input type="text" name="usuario" class="input" id="grupo__usuario">
+                    <input type="text" name="usuario" class="input" id="grupo__usuario" value="<?php echo $usuario; ?>">
+                    <?php
+                    if(isset($errores['usuario'])){
+                    ?>
+                    <div class="formulario__mensaje_error"><?php echo $errores['usuario']; ?></div>
+                    <?php
+                    }
+                    ?>
                 </div>
                 <div class="formulario__grupo">
                     <label for="contraseña">Cntraseña</label>
                     <input type="password" name="contraseña" class="input grupo__contraseña" id="grupo__contraseña">
+                    <?php
+                    if(isset($errores['contraseña'])){
+                    ?>
+                    <div class="formulario__mensaje_error"><?php echo $errores['contraseña']; ?></div>
+                    <?php
+                    }
+                    ?>
                 </div>
 
                 <div class="formulario__options">
@@ -28,8 +64,14 @@
                 </div>
 
                 <div class="formulario__boton-enviar">
-                    <button type="submit" class="boton-enviar">INICIAR SESION</button>
-                    <div class="formulario__mensaje_error">El usuario o la contraseña son incorrectos!</div>
+                    <button type="submit" class="boton-enviar" name="iniciar_sesion">INICIAR SESION</button>
+                    <?php
+                    if(isset($errores['login'])){
+                    ?>
+                    <div class="formulario__mensaje_error"><?php echo $errores['login']; ?></div>
+                    <?php
+                    }
+                    ?>
                     <div class="formulario__options">
                         <span>¿No tienes cuenta?</span> <a href="/">Crea una cuenta</a>
                     </div>
