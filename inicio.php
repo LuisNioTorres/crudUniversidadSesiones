@@ -1,7 +1,10 @@
 <?php
 include('./funciones.php');
+include('./controlador_user_logueado.php');
 $id_decano = $_SESSION['id_decano'];
 $res = obtener_Decano_Facultad($id_decano);
+
+
 ?>
 
 

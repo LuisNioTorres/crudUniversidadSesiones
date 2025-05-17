@@ -1,3 +1,18 @@
+<?php
+include('./funciones.php');
+include('./controlador_user_logueado.php');
+
+if(isset($_GET['id_carrera'])){
+    $id_carrera = $_GET['id_carrera'];
+} else {
+    header('location: facultades.php');
+}
+
+$estudiantes = obtenerEstudiantes($id_carrera);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,12 +43,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                            while($estudiante = $estudiantes->fetch_assoc()){
+                            ?>
                                 <tr>
                                     <td><img width="100px" src=""></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?php echo $estudiante['nombre_carrera']; ?></td>
+                                    <td><?php echo $estudiante['id_estudiante']; ?></td>
+                                    <td><?php echo $estudiante['cedula']; ?></td>
+                                    <td><?php echo $estudiante['nombre']; ?></td>
                                     <td>
                                         <a href="" class="btn btn-success">
                                             Editar
@@ -41,6 +59,9 @@
                                         <button type="button" class="btn btn-danger">Eliminar</button>
                                     </td>
                                 </tr>
+                            <?php
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>

@@ -1,5 +1,7 @@
 <?php
 include('./funciones.php');
+include('./controlador_user_logueado.php');
+
 $id_decano = $_SESSION['id_decano'];
 $res = obtener_Decano_Facultad($id_decano);
 $id_facultad = $res['id_facultad'];
@@ -27,12 +29,15 @@ $carreras = obtenerCarreras($id_facultad);
                     <?php
                     while($carrera = $carreras->fetch_assoc()){
                     ?>
-                    <section class="carrera">
+                    <a href="carrera.php?id_carrera=<?php echo $carrera['id_carrera'] ;?>">
+                    <section class="carrera" >
                         <h2><?php echo $carrera['nombre_carrera']; ?></h2>
                     </section>
+                    </a>
                     <?php
                     }
                     ?>
+                    </form>
                 </div>
             
             </div>

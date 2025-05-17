@@ -36,9 +36,9 @@
                     </li>
         
                     <li class="opcion" style="--clr: purple;">
-                        <a href="#">
+                        <a href="./cerrar_sesion.php">
                             <span class="icono">
-                                <ion-icon name="settings-outline"></ion-icon>
+                                <ion-icon name="log-out-outline"></ion-icon>
                             </span>
                             <span class="texto">
                                 Configuracion

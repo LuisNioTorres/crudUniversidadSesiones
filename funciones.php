@@ -54,18 +54,26 @@ function obtener_Decano_Facultad ($id_decano) {
     $sentenciaSQL->execute();
     $res = $sentenciaSQL->get_result();
     $fila = $res->fetch_assoc();
-    print_r($fila);
     return $fila;
 }
 
 function obtenerCarreras ($id_facultad){
     $conn = conectardb();
-    $sentenciaSQL = $conn->prepare("SELECT carrera.nombre AS nombre_carrera FROM carrera WHERE carrera.id_facultad =?");
+    $sentenciaSQL = $conn->prepare("SELECT carrera.nombre AS nombre_carrera, carrera.id_carrera AS id_carrera FROM carrera WHERE carrera.id_facultad =?");
     $sentenciaSQL->bind_param('i',$id_facultad);
     $sentenciaSQL->execute();
     $res = $sentenciaSQL->get_result();
     return $res;
 }
 
-
+function obtenerEstudiantes ($id_carrera) {
+    $conn = conectardb();
+    $consultaSQL = $conn->prepare("SELECT e.*, c.nombre AS nombre_carrera FROM estudiante e 
+                                   INNER JOIN carrera c ON e.id_carrera = c.id_carrera 
+                                   WHERE e.id_carrera = ?");
+    $consultaSQL->bind_param('i',$id_carrera);
+    $consultaSQL->execute();
+    $res = $consultaSQL->get_result();
+    return $res;
+}
 ?>

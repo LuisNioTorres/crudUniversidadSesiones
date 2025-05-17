@@ -1,6 +1,10 @@
 <?php
 include('./funciones.php');
 
+if(!empty($_SESSION['id_decano'])){
+    header('location: inicio.php');
+}
+
 $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : "";
 $contraseña = isset($_POST['contraseña']) ? $_POST['contraseña'] : "";
 $errores = [];
