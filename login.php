@@ -9,10 +9,7 @@ if(isset($_POST['iniciar_sesion'])){
     validarUsuario($errores,$usuario);
     validarContraseña($errores,$contraseña);
     if(empty($errores)){
-    $login = loguearUsuario($usuario,$contraseña);
-        if(!$login){
-            $errores['login'] = 'El usuario o la contraseña son incorrectos';
-        }
+    loguearUsuario($errores,$usuario,$contraseña);
     }
 }
 

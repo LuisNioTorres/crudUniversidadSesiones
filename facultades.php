@@ -1,3 +1,11 @@
+<?php
+include('./funciones.php');
+$id_decano = $_SESSION['id_decano'];
+$res = obtener_Decano_Facultad($id_decano);
+$id_facultad = $res['id_facultad'];
+$carreras = obtenerCarreras($id_facultad);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,15 +21,18 @@
         <div class="index">
             <?php include('navegation.php');?>
             <div class="screen screen__facultad">
-                <h3>FACULTAD DE INGENIERIA</h3>
+                <h3>FACULTAD DE <?php echo $res['facultad'];?></h3>
                 <h2>Carreras:</h2>
                 <div class="carreras">
+                    <?php
+                    while($carrera = $carreras->fetch_assoc()){
+                    ?>
                     <section class="carrera">
-                        <h2>INGENIERIA</h2>
+                        <h2><?php echo $carrera['nombre_carrera']; ?></h2>
                     </section>
-                    <section class="carrera">
-                        <h2>CIVIL</h2>
-                    </section>
+                    <?php
+                    }
+                    ?>
                 </div>
             
             </div>

@@ -1,3 +1,10 @@
+<?php
+include('./funciones.php');
+$id_decano = $_SESSION['id_decano'];
+$res = obtener_Decano_Facultad($id_decano);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +17,7 @@
         <?php include('./header.php'); ?>
         <div class="index">
             <?php include('navegation.php') ;?>
-            <div class="screen">HOLA, BIENVENIDO....
+            <div class="screen">HOLA <?php echo $res['nombre'].' '.$res['apellido']; ?>, BIENVENIDO....
                 <div class="chiste">Alegra tu día:</div>
             </div>
         </div>

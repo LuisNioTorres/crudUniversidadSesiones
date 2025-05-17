@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 function conectardb () {
     $hostname = 'localhost';
@@ -15,14 +16,20 @@ function conectardb () {
 
 }
 
-function loguearUsuario ($usuario,$contraseña) {
+function loguearUsuario (array &$errores,$usuario,$contraseña) : void {
     $conn = conectardb();
     $sentenciaSQL = $conn->prepare("SELECT * FROM usuario WHERE usuario = ?");
     $sentenciaSQL->bind_param('s',$usuario);
     $sentenciaSQL->execute();
     $res = $sentenciaSQL->get_result();
     $fila = $res->fetch_assoc();
-    return $fila && $fila['contraseña'] === $contraseña;
+    if($fila && $fila['contraseña'] === $contraseña){
+        $_SESSION['id_decano'] = $fila['id_decano'];
+        header("location:inicio.php");
+
+    }else{
+        $errores['login'] = 'El usuario o la contraseña son incorrectos';
+    }
 }
 
 function validarUsuario (array &$errores, $usuario) : void {
@@ -37,6 +44,28 @@ function validarContraseña (array &$errores, $contraseña) : void {
     }
 }
 
+
+function obtener_Decano_Facultad ($id_decano) {
+    $conn = conectardb();
+    $sentenciaSQL = "SELECT decano.nombre, decano.apellido, facultad.id_facultad, facultad.nombre AS facultad FROM decano 
+                     INNER JOIN facultad ON decano.id_facultad = facultad.id_facultad WHERE decano.cedula =?";
+    $sentenciaSQL = $conn->prepare($sentenciaSQL);
+    $sentenciaSQL->bind_param('i',$id_decano);
+    $sentenciaSQL->execute();
+    $res = $sentenciaSQL->get_result();
+    $fila = $res->fetch_assoc();
+    print_r($fila);
+    return $fila;
+}
+
+function obtenerCarreras ($id_facultad){
+    $conn = conectardb();
+    $sentenciaSQL = $conn->prepare("SELECT carrera.nombre AS nombre_carrera FROM carrera WHERE carrera.id_facultad =?");
+    $sentenciaSQL->bind_param('i',$id_facultad);
+    $sentenciaSQL->execute();
+    $res = $sentenciaSQL->get_result();
+    return $res;
+}
 
 
 ?>
